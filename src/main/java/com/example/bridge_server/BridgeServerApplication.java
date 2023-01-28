@@ -86,9 +86,6 @@ public class BridgeServerApplication {
         SpringApplication.run(BridgeServerApplication.class, args);
     }
 
-    // copy system.exe , libai.so, setup_mjai.json, param
-    // cors enable localhost
-    //  send three args to execute  at /Users/hougrt/banzhuan/akochan/system.exe and return the result to the client
     public static String execute(String[] args) {
         String result = "";
         try {
