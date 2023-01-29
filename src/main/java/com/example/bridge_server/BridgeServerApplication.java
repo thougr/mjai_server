@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.*;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 @RestController
@@ -27,7 +28,7 @@ public class BridgeServerApplication {
                 InputStreamReader isr = new InputStreamReader (is);
                 BufferedReader br = new BufferedReader (isr);
                 String line = null;
-                while ((line = br.readLine()) != null)
+                while (!isInterrupted() && (line = br.readLine()) != null)
                     System.out.println (type + ">" + line);
             } catch (IOException ioe) {
                 ioe.printStackTrace();
@@ -94,6 +95,14 @@ public class BridgeServerApplication {
             // use for debug
             StreamConsumer errorGobbler = new StreamConsumer(process.getErrorStream(), "ERROR");
             errorGobbler.start();
+            // set timeout
+            if (!process.waitFor(6, TimeUnit.SECONDS)) {
+                System.out.println("timeout: 杀死线程");
+                process.destroy();
+                // kill the errorGobbler
+                errorGobbler.interrupt();
+                return "timeout";
+            }
             java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
             result = s.hasNext() ? s.next() : "";
             result = result.trim();
