@@ -92,12 +92,13 @@ public class BridgeServerApplication {
             Process process = Runtime.getRuntime().exec(args);
             java.io.InputStream is = process.getInputStream();
             // use for debug
-//            StreamConsumer errorGobbler = new StreamConsumer(process.getErrorStream(), "ERROR");
-//            errorGobbler.start();
+            StreamConsumer errorGobbler = new StreamConsumer(process.getErrorStream(), "ERROR");
+            errorGobbler.start();
             java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
             result = s.hasNext() ? s.next() : "";
             result = result.trim();
             // get last line of result
+            System.out.println("result:" + result);
             result = result.substring(result.lastIndexOf("\n"));
 
         } catch (Exception e) {
