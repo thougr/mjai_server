@@ -1,5 +1,5 @@
 FROM openjdk:17-oracle
-ARG JAR_FILE=target/*.jar
+ARG JAR_FILE=*.jar
 COPY ${JAR_FILE} app.jar
 ENV LD_LIBRARY_PATH=/lib:$LD_LIBRARY_PATH
 
