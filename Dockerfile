@@ -1,6 +1,7 @@
 FROM openjdk:17-oracle
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
+ENV LD_LIBRARY_PATH=/lib:$LD_LIBRARY_PATH
 
 RUN  microdnf install git \
     && microdnf install boost-devel boost \
@@ -11,7 +12,7 @@ RUN   git clone https://github.com/critter-mj/akochan.git \
     && make -f Makefile_Linux \
     && cd .. \
     && make -f Makefile_Linux \
-    && cp -r  system.exe setup_mjai.json params /  \
+    && cp -r libai.so system.exe setup_mjai.json params /  \
     && cp libai.so  /lib
 
 ENTRYPOINT ["java","-jar","/app.jar"]
