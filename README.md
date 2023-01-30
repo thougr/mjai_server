@@ -1,7 +1,7 @@
 # mjai_server
 
 ## 关于这个工程
-该项目是运行[Akochan](https://github.com/critter-mj/akochan) AI的服务器项目。 
+该项目是运行[Akochan](https://github.com/critter-mj/akochan) Mahjong AI的服务器项目。 
 
 ## 如何上手
 方法一（推荐）:
