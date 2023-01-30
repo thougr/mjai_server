@@ -67,7 +67,6 @@ public class BridgeServerApplication {
         }
     }
 
-    // write actions to file
     public void writeActionsToFile(List<Object> actions) {
         // write actions to file split with line
         try (PrintWriter writer = new PrintWriter("actions.json", "UTF-8")) {
@@ -78,7 +77,7 @@ public class BridgeServerApplication {
             e.printStackTrace();
         }
     }
-    // hello world test
+
     @GetMapping("/hello")
     public String hello() {
         return "hello world";
@@ -107,7 +106,6 @@ public class BridgeServerApplication {
             result = s.hasNext() ? s.next() : "";
             result = result.trim();
             // get last line of result
-            System.out.println("result:" + result);
             result = result.substring(result.lastIndexOf("\n"));
 
         } catch (Exception e) {
